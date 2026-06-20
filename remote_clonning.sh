@@ -46,10 +46,11 @@ exit;
 SQL
 EOF
 )
+OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if [ $? -ne 0 ]; then
+if [ $OUTPUT_STATUS -ne 0 ]; then
   echo "❌ Failed to drop common user ${USER_CLONE}"
   echo "$OUTPUT"
   exit 1
@@ -72,10 +73,11 @@ drop database link ${DB_NAME};
 exit;
 SQL
 )
+OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if echo "$OUTPUT" | grep -q "ORA-"; then
+if [ $OUTPUT_STATUS -ne 0 ]; then
   echo "❌ Failed to drop DBLink ${DB_NAME}"
   echo "$OUTPUT"
   exit 1
@@ -107,10 +109,11 @@ exit;
 SQL
 EOF
 )
+OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if echo "$OUTPUT" | grep -q "ORA-"; then
+if [ $OUTPUT_STATUS -ne 0 ]; then
   echo "❌ Failed to create common user ${USER_CLONE}"
   echo "$OUTPUT"
   exit 1
@@ -129,10 +132,11 @@ create database link ${DB_NAME} connect to ${USER_CLONE} identified by "${PASS_C
 exit;
 SQL
 )
+OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if echo "$OUTPUT" | grep -q "ORA-"; then
+if [ $OUTPUT_STATUS -ne 0 ]; then
   echo "❌ Failed to create DBLink ${DB_NAME}"
   echo "$OUTPUT"
   exit 1
@@ -151,10 +155,11 @@ set heading off feedback off pagesize 0
 exit;
 SQL
 )
+OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if echo "$OUTPUT" | grep -q "ORA-"; then
+if [ $OUTPUT_STATUS -ne 0 ]; then
   echo "❌ Failed to create PDB ${PDB_NAME}"
   echo $OUTPUT
   drop_user
