@@ -2,6 +2,11 @@
 
 . /home/oracle/.bashrc
 
+if [ "$#" -ne 4 ]; then
+  echo " Fault parameters"
+  exit 1
+fi
+
 AUX_CONN=$1
 TARGET_CONN=$2
 LOG_FILE_NAME=/tmp/duplicate_pdb_`date +%d_%m_%Y`.log
