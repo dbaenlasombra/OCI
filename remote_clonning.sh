@@ -50,7 +50,7 @@ OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if [ $OUTPUT_STATUS -ne 0 ]; then
+if [ $OUTPUT_STATUS -ne 0 ] || echo "$OUTPUT" | grep -E "ORA-|SP2-|TNS-|ERROR" > /dev/null; then
   echo "❌ Failed to drop common user ${USER_CLONE}"
   echo "$OUTPUT"
   exit 1
@@ -77,7 +77,7 @@ OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if [ $OUTPUT_STATUS -ne 0 ]; then
+if [ $OUTPUT_STATUS -ne 0 ] || echo "$OUTPUT" | grep -E "ORA-|SP2-|TNS-|ERROR" > /dev/null; then
   echo "❌ Failed to drop DBLink ${DB_NAME}"
   echo "$OUTPUT"
   exit 1
@@ -113,7 +113,7 @@ OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if [ $OUTPUT_STATUS -ne 0 ]; then
+if [ $OUTPUT_STATUS -ne 0 ] || echo "$OUTPUT" | grep -E "ORA-|SP2-|TNS-|ERROR" > /dev/null; then
   echo "❌ Failed to create common user ${USER_CLONE}"
   echo "$OUTPUT"
   exit 1
@@ -136,7 +136,7 @@ OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if [ $OUTPUT_STATUS -ne 0 ]; then
+if [ $OUTPUT_STATUS -ne 0 ] || echo "$OUTPUT" | grep -E "ORA-|SP2-|TNS-|ERROR" > /dev/null; then
   echo "❌ Failed to create DBLink ${DB_NAME}"
   echo "$OUTPUT"
   exit 1
@@ -159,7 +159,7 @@ OUTPUT_STATUS=$?
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
-if [ $OUTPUT_STATUS -ne 0 ]; then
+if [ $OUTPUT_STATUS -ne 0 ] || echo "$OUTPUT" | grep -E "ORA-|SP2-|TNS-|ERROR" > /dev/null; then
   echo "❌ Failed to create PDB ${PDB_NAME}"
   echo $OUTPUT
   drop_user
