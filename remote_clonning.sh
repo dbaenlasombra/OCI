@@ -141,6 +141,7 @@ else
   echo "    Elap ${ELAPSED} seg"
 fi
 
+START_TIME=$(date +%s)
 ## Create PDB in Target
 OUTPUT=$(sqlplus -s / as sysdba <<SQL
 WHENEVER SQLERROR EXIT SQL.SQLCODE
